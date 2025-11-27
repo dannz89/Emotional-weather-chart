@@ -1,7 +1,9 @@
 // app/(tabs)/index.tsx
+import { ThemedText } from '@/components/themed-text';
 import {
   BottomSheetModal,
 } from '@gorhom/bottom-sheet';
+import { Link } from 'expo-router';
 
 import React, { useMemo } from 'react';
 import {
@@ -157,8 +159,8 @@ const LogNowSheet: React.FC<LogNowSheetProps> = ({ bottomSheetRef }) => {
   return (
     <BottomSheetModal
       ref={bottomSheetRef}
-      index={0}
       snapPoints={snapPoints}
+      enableDynamicSizing={false}
       backgroundStyle={styles.sheetBackground}
       handleIndicatorStyle={styles.sheetHandle}
     >
@@ -233,6 +235,7 @@ const LogNowSheet: React.FC<LogNowSheetProps> = ({ bottomSheetRef }) => {
     </BottomSheetModal>
   );
 };
+
 
 // ---- Home screen ----
 
@@ -407,13 +410,28 @@ function HomeScreenInner() {
 // Wrap with BottomSheetModalProvider so the modal works
 export default function HomeScreen() {
   return (
-      <HomeScreenInner />
+      <><HomeScreenInner />
+
+      <Link href="/modal" asChild>
+        <Pressable style={styles.modalButton}>
+          <ThemedText type="link">Open modal</ThemedText>
+        </Pressable>
+      </Link>
+      </>
   );
 }
 
 // ---- Styles ----
 
 const styles = StyleSheet.create({
+  modalButton: {
+    position: 'absolute',
+    bottom: 150,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#e0e0e0',
+    borderRadius: 8,
+  },
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',

@@ -16,15 +16,17 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <BottomSheetModalProvider>
+      
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          <BottomSheetModalProvider>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
           </Stack>
+          </BottomSheetModalProvider>
           <StatusBar style="auto" />
         </ThemeProvider>
-      </BottomSheetModalProvider>
+      
     </GestureHandlerRootView>
 
   );
